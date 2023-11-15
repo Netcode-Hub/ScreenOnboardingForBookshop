@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ScreenOnboardingForBookshop.MainPage"
+             xmlns:viewmodel="clr-namespace:ScreenOnboardingForBookshop.ViewModel"
+             x:DataType="viewmodel:BookViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#fbe1c8"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#fc8663"></toolkit:StatusBarBehavior>
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="*,Auto" Margin="0,-20,0,0">
+        <CarouselView ItemsSource="{Binding Books}" IndicatorView="IndicatorView" x:Name="myCarousel" PositionChanged="myCarousel_PositionChanged" Loop="False">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodel:Book">
+                    <Grid RowDefinitions="*, Auto,Auto,Auto">
+                        <Image Grid.Row="0" Source="{Binding Image}" Aspect="AspectFit"></Image>
+                        <Label Grid.Row="1" Text="{Binding Title}" FontSize="36" TextColor="IndianRed" FontAttributes="Bold"  Margin="20,0,20,60" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"></Label>
+                        <Label Grid.Row="2" Margin="20,0,20,50" Text="{Binding Description}" LineHeight="1.2"></Label>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <VerticalStackLayout Grid.Row="1" Margin="0,0,0,20" Spacing="10">
+            <HorizontalStackLayout>
+                <Button x:Name="MyButton" WidthRequest="350" HeightRequest="50" VerticalOptions="End" BackgroundColor="#fc8663" FontAttributes="Bold" Margin="20,0,0,10" CornerRadius="0" Clicked="Button_Clicked"></Button>
+                <Image Source="button_arrow.png" WidthRequest="20" Margin="-100,-8,0,0">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="white"/>
+                    </Image.Behaviors>
+                </Image>
+            </HorizontalStackLayout>
+
+
+            <IndicatorView x:Name="IndicatorView" IndicatorColor="#c9c4ba" SelectedIndicatorColor="#fc8d69" HorizontalOptions="CenterAndExpand">
+                <IndicatorView.IndicatorTemplate>
+                    <DataTemplate>
+                        <Border HeightRequest="8" WidthRequest="113" Stroke="#cdaeaa">
+                        </Border>
+                    </DataTemplate>
+                </IndicatorView.IndicatorTemplate>
+            </IndicatorView>
+
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
